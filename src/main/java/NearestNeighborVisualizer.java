@@ -41,7 +41,7 @@ public class NearestNeighborVisualizer {
             double y = StdDraw.mouseY();
             Point2D query = new Point2D(x, y);
 
-            // draw all of the points
+            // draw all the points
             StdDraw.clear();
             StdDraw.setPenColor(StdDraw.BLACK);
             StdDraw.setPenRadius(0.01);
