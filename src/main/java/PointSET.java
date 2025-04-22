@@ -1,7 +1,6 @@
 import edu.princeton.cs.algs4.Point2D;
 import edu.princeton.cs.algs4.RectHV;
 import edu.princeton.cs.algs4.StdDraw;
-import edu.princeton.cs.algs4.Queue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,6 +8,8 @@ import java.util.TreeSet;
 
 public class PointSET {
     private final TreeSet<Point2D> points;
+
+    private static final double DEFAULT_PEN_RADIUS = 0.01;
 
     public PointSET() {
         points = new TreeSet<>();
@@ -38,7 +39,7 @@ public class PointSET {
 
     public void draw() {
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setPenRadius(0.01);
+        StdDraw.setPenRadius(DEFAULT_PEN_RADIUS);
         for (Point2D p : points) {
             p.draw();
         }

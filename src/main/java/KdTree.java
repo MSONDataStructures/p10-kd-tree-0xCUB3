@@ -12,6 +12,9 @@ public class KdTree {
     private Node root;
     private int count;
 
+    private Point2D champion;
+    private double championDistSq;
+
     private static class Node {
         private final Point2D p;
         private final RectHV rect;
@@ -143,10 +146,6 @@ public class KdTree {
         range(h.rt, queryRect, pointsInRange);
     }
 
-
-    private Point2D champion;
-    private double championDistSq;
-
     public Point2D nearest(Point2D p) {
         if (p == null) throw new IllegalArgumentException("argument to nearest() is null");
         if (isEmpty()) return null;
@@ -190,14 +189,12 @@ public class KdTree {
             second = h.lb;
         }
 
-        // Recursively search
         nearest(first, queryPoint, !orientation);
         nearest(second, queryPoint, !orientation);
     }
 
 
     public static void main(String[] args) {
-        // Optional unit testing
         KdTree kdtree = new KdTree();
         kdtree.insert(new Point2D(0.7, 0.2));
         kdtree.insert(new Point2D(0.5, 0.4));
@@ -205,18 +202,18 @@ public class KdTree {
         kdtree.insert(new Point2D(0.4, 0.7));
         kdtree.insert(new Point2D(0.9, 0.6));
 
-        System.out.println("Size: " + kdtree.size()); // Expected 5
+        System.out.println("Size: " + kdtree.size());
         System.out.println("Contains (0.4, 0.7): " + kdtree.contains(new Point2D(0.4, 0.7)));
         System.out.println("Contains (0.5, 0.5): " + kdtree.contains(new Point2D(0.5, 0.5)));
 
-        // Test range search
+        // test: range search
         RectHV rect = new RectHV(0.1, 0.1, 0.6, 0.8);
         System.out.println("Points in rectangle " + rect + ":");
         for (Point2D p : kdtree.range(rect)) {
             System.out.println("  " + p);
         }
 
-        // Test nearest neighbor
+        // test: nearest neighbor
         Point2D query = new Point2D(0.81, 0.3);
         Point2D nearest = kdtree.nearest(query);
         System.out.println("Nearest point to " + query + " is " + nearest);
